@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>微信开放标签测试</title>
+  <style>
+    #test {
+      width: 500px;
+      height: 500px;
+      background-color: cyan;
+    }
+  </style>
+</head>
+<body>
+
+
+  <div id="test">
+    <div data-wx-tag id="static">静态节点</div>
+  </div>
+  
+  <button id="addbtn1">添加普通节点</button>
+  <button id="addbtn2">动态添加微信开放标签节点</button>
+
+
+  
+  <script src="lib/bundle.js"></script>
+  <script>
+    const openSoul = new wxlaunch({
+      appId: 'soulAppId',
+      extinfo: '{url: "https:ul.soulapp.cn/pathname?query=query"}',
+      after: () => {alert('唤起app')}
+    })
+
+    openSoul.add(document.getElementById('static'))
+    
+    openSoul.observe(document.getElementById('test'))
+
+
+
+
+
+
+
+    addbtn1.onclick = function() {
+      const div = document.createElement('div')
+      div.textContent = 'add div'
+      document.getElementById('test').append(div)
+    }
+
+    addbtn2.onclick = function() {
+      const div = document.createElement('div')
+      div.textContent = 'add wx-open-tag'
+      div.setAttribute('data-wx-tag', '')
+      document.getElementById('test').append(div)
+    }
+  </script>
+</body>
+</html>
